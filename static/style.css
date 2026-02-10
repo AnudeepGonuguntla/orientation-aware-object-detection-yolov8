@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #F4F6F9;
+    margin: 0;
+    padding: 0;
+}
+
+/* HEADER */
+.header {
+    background: linear-gradient(90deg, #0F4C75, #3282B8);
+    color: white;
+    padding: 35px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 42px;
+}
+
+.header p {
+    margin-top: 8px;
+    font-size: 18px;
+}
+
+/* MAIN CONTAINER */
+.container {
+    width: 80%;
+    margin: 40px auto;
+}
+
+/* CARD */
+.card {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.card h2 {
+    color: #0F4C75;
+}
+
+.card input[type="file"] {
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+/* BUTTON */
+button {
+    background-color: #3282B8;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1B6FA8;
+}
+
+/* RESULT SECTION */
+.result-section {
+    display: flex;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* IMAGE BOX */
+.image-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 60%;
+}
+
+.image-box img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* SUMMARY BOX */
+.summary {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    width: 40%;
+}
+
+.summary h3 {
+    color: #0F4C75;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #EAEAEA;
+    margin-top: 40px;
+}
