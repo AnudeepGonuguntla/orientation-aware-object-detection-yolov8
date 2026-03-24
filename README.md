@@ -1,3 +1,12 @@
+---
+title: Raven Detection
+emoji: 🚀
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+---
+
 # Orientation-Aware Object Detection for Aerial Imagery Using YOLOv8
 
 This project focuses on detecting rotated objects in aerial and satellite imagery using an enhanced YOLOv8-based object detection framework. The system is integrated with a Flask-based web interface to allow easy image upload and result visualization.
