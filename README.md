@@ -7,86 +7,116 @@ sdk: docker
 pinned: false
 ---
 
-# 🦅 RAVEN: Orientation-Aware Object Detection for Aerial Imagery
+<div align="center">
+  <h1>RAVEN: Orientation-Aware Object Detection for Aerial Imagery</h1>
+</div>
 
-**RAVEN (Rotated-Annotation Vehicle and Entity Network)** is a full-stack deep learning application built to detect rotated/oriented objects in aerial and satellite imagery. By leveraging an enhanced **YOLOv8-OBB** (Oriented Bounding Boxes) framework, the system accurately detects objects at any angle, making it ideal for satellite maps, drones, and aerial reconnaissance.
+<p align="center">
+  <a href="https://huggingface.co/spaces/Deepu61004/raven-detection">
+    <img src="https://img.shields.io/badge/Demo-Hugging%20Face%20Spaces-blue?style=for-the-badge&logo=huggingface" alt="Hugging Face Deployment">
+  </a>
+  <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/YOLOv8-Ultralytics-0073F7?style=for-the-badge" alt="YOLOv8">
+  <img src="https://img.shields.io/badge/Flask-Web%20App-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask">
+</p>
 
-It features a complete **Flask web interface** with user authentication, real-time visualization, cloud database history tracking, and downloadable PDF/CSV reports.
+## 1. Abstract
 
-### 🌐 Live Demo
-**[Try RAVEN Live on Hugging Face Spaces](https://huggingface.co/spaces/Deepu61004/raven-detection)**
+**RAVEN (Rotated-Annotation Vehicle and Entity Network)** is a comprehensive deep learning application engineered for high-precision, orientation-aware object detection in aerial and satellite imagery. By extending the **YOLOv8-OBB (Oriented Bounding Boxes)** framework, RAVEN overcomes the limitations of standard horizontal bounding boxes, accurately resolving the spatial orientation of densely packed objects such as vehicles, aircraft, and maritime vessels.
 
----
-
-## ✨ Key Features
-* **Orientation-Aware Detection (OBB):** Identifies objects like ships, vehicles, and planes at exact angles using the DOTA and HRSC datasets.
-* **Multiple AI Models:** Choose between Standard YOLOv8, DOTA-OBB, HRSC-OBB, and Fine-Grained Classification models.
-* **User Authentication:** Secure `bcrypt` hashed login and registration system.
-* **Persistent History:** All detection statistics (Inference Time, FPS, Object Density) are tracked globally via a Clever Cloud MySQL database.
-* **Advanced Reporting:** Export detailed detection analytics instantly as beautifully formatted **PDFs** or **CSV** spreadsheets.
-* **Hugging Face Optimized:** Fully containerized via Docker and configured for iframe deployment on Hugging Face Spaces.
-
----
-
-## 🛠️ Tech Stack
-* **Deep Learning:** Python, PyTorch, YOLOv8 (Ultralytics), OpenCV
-* **Backend:** Flask, Gunicorn
-* **Database:** MySQL (PyMySQL), Clever Cloud
-* **Frontend:** HTML5, CSS3, Vanilla JavaScript
-* **Deployment:** Docker, Git LFS, Hugging Face Spaces
+The system features a production-ready Flask web interface providing user authentication, real-time inference visualization, centralized historical telemetry via a cloud database, and automated analytical reporting.
 
 ---
 
-## 🚀 How to Run Locally
+## 2. Core Capabilities
 
-Because this project utilizes large `.pt` AI models, you must have **[Git LFS (Large File Storage)](https://git-lfs.com/)** installed on your machine before downloading the code.
+* **Multi-Modal Inference:** Supports dynamic switching between Standard YOLOv8, DOTA-OBB, and HRSC-OBB models to accommodate diverse aerial datasets.
+* **Fine-Grained Classification:** Implements secondary inference pipelines utilizing the FAIR1M dataset for highly specific subset classification of detected objects.
+* **Centralized Telemetry:** Inference metrics (object density, frames per second, processing latency) are aggregated and persisted across sessions using a global Clever Cloud MySQL database.
+* **Automated Analytics:** Authorized users can export session data and visual outputs into structured CSV spreadsheets or comprehensive PDF documents.
+* **Containerized Deployment:** Packaged via Docker for seamless portability and deployed as an interactive application on Hugging Face Spaces.
 
-### 1. Clone the Repository
+---
+
+## 3. Technical Architecture
+
+* **Computer Vision Backbone:** PyTorch, Ultralytics YOLOv8-OBB, OpenCV
+* **Backend Infrastructure:** Python 3.12, Flask, Gunicorn, Werkzeug
+* **Data Persistence:** PyMySQL (Clever Cloud MySQL instance)
+* **Frontend Presentation:** HTML5, CSS3, Vanilla ES6 JavaScript
+* **Reporting Engine:** ReportLab (PDF configuration), CSV Module
+* **Version Control & CI/CD:** Git LFS, Docker
+
+---
+
+## 4. Installation & Deployment
+
+### 4.1 Prerequisites
+Due to the integration of proprietary Model Weights (`.pt` files) exceeding standard repository limits, **Git Large File Storage (LFS)** is mandatory prior to repository cloning.
+
+* [Git LFS](https://git-lfs.com/)
+* [Python 3.10+](https://www.python.org/downloads/)
+* [Docker](https://www.docker.com/) (Optional, for containerized execution)
+
+### 4.2 Local Environment Setup
+
+**1. Clone the Repository:**
 ```bash
 git lfs install
 git clone https://github.com/AnudeepGonuguntla/orientation-aware-object-detection-yolov8.git
 cd orientation-aware-object-detection-yolov8
 ```
 
-### 2. Install Dependencies
-It is highly recommended to use a virtual environment.
+**2. Initialize Virtual Environment:**
 ```bash
-# Create and activate a virtual environment (Windows)
 python -m venv venv
+# Windows:
 .\venv\Scripts\activate
+# Linux/macOS:
+source venv/bin/activate
+```
 
-# Install the minimal required packages
+**3. Install Dependencies:**
+```bash
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 3. Set Up Environment Variables (Optional)
-By default, the application connects to the cloud database. If you want to use a local MySQL database, set the following environment variables or create a `.env` file:
-* `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`
-* `SECRET_KEY` (Flask session key)
-
-### 4. Run the Application
+**4. Execute the Server:**
 ```bash
 python app.py
 ```
-Once the server starts, open your web browser and navigate to `http://127.0.0.1:5000`
+The application will initialize at `http://127.0.0.1:5000`.
 
 ---
 
-## ☁️ Hugging Face Deployment
+## 5. Cloud Configuration Options
 
-This project is built to run effortlessly on Hugging Face Spaces using the included `Dockerfile`.
+The application relies on secure environment variables for production telemetry. For local development isolated from the Clever Cloud cluster, map the following variables in a `.env` file:
+* `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`
+* `SECRET_KEY` (Cryptographic key for Flask session signing)
 
-1. Go to Hugging Face and create a new **Docker** Space.
-2. Link your GitHub repository or use the Hugging Face CLI to add the huggingface remote:
+*(Note: In the absence of these variables, the application defaults to hardcoded fallback connections).*
+
+---
+
+## 6. Hugging Face Spaces Deployment
+
+The repository is configured for native compliance with the Hugging Face Spaces Docker SDK.
+
+1. Provision a New Space on [Hugging Face](https://huggingface.co/spaces) using the **Docker** > **Blank** template.
+2. Link the Hugging Face remote to your local repository:
    ```bash
-   git remote add huggingface https://huggingface.co/spaces/YOUR_USERNAME/YOUR_SPACE_NAME
+   git remote add huggingface https://huggingface.co/spaces/<USERNAME>/<SPACE_NAME>
+   ```
+3. Push via Git LFS using a valid Write-Access Token:
+   ```bash
    git push -f huggingface main
    ```
-*(Note: Ensure you generate a Hugging Face 'Write' Access Token to use as your password during the push!)*
 
 ---
 
-## 🔮 Future Scope
-* Integration of real-time drone RTSP video feeds.
-* Advanced analytics dashboard for detecting traffic density patterns over time.
-* Further optimization of model weights using TensorRT or ONNX for edge devices.
+## 7. License & Acknowledgements
+
+Distributed under the MIT License. See `LICENSE` for more information.  
+Special thanks to the [Ultralytics](https://github.com/ultralytics/ultralytics) team for the underlying YOLO architecture and the open-source DOTA/HRSC aerial dataset communities.
