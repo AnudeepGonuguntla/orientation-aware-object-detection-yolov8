@@ -138,18 +138,7 @@
             <a href="/register" style="background:linear-gradient(135deg,#6644ff,#00cfff);color:#fff;padding:6px 16px;border-radius:20px;font-size:13px;text-decoration:none;font-weight:600;transition:0.2s;">Register</a>
         {% endif %}
 
-        <!-- THEME TOGGLE -->
-        <div class="theme-toggle-wrap" title="Toggle light/dark mode">
-            <span class="theme-icon" id="icon-moon">&#127769;</span>
-            <label class="toggle-switch">
-                <input type="checkbox" id="theme-toggle">
-                <div class="toggle-track"></div>
-                <div class="toggle-knob" id="toggle-knob">&#127769;</div>
-            </label>
-            <span class="theme-icon" id="icon-sun">&#9728;&#65039;</span>
-        </div>
-    </div>
-</div>
+
 
 {% block content %}{% endblock %}
 
@@ -240,50 +229,6 @@ document.querySelectorAll(".zoom-container").forEach(function(container) {
         img.style.transform = "scale(1)";
     });
 });
-
-// ── THEME TOGGLE ─────────────────────────────────────────────
-(function() {
-    var toggle = document.getElementById('theme-toggle');
-    var knob   = document.getElementById('toggle-knob');
-    if (!toggle) return;
-
-    // Load saved preference
-    var saved = localStorage.getItem('raven-theme');
-    if (saved === 'light') {
-        document.body.classList.add('light-mode');
-                document.querySelectorAll('.step-card,.feature-card,.card,.dataset-card').forEach(function(el){
-                    el.style.background='';
-                    el.style.boxShadow='';
-                    el.style.borderColor='';
-                });
-        toggle.checked = true;
-        if (knob) knob.textContent = '\u2600\uFE0F';
-    } else {
-        if (knob) knob.textContent = '\u{1F319}';
-    }
-
-    toggle.addEventListener('change', function() {
-        if (this.checked) {
-            document.body.classList.add('light-mode');
-                document.querySelectorAll('.step-card,.feature-card,.card,.dataset-card').forEach(function(el){
-                    el.style.background='';
-                    el.style.boxShadow='';
-                    el.style.borderColor='';
-                });
-            localStorage.setItem('raven-theme', 'light');
-            if (knob) knob.textContent = '\u2600\uFE0F';
-        } else {
-            document.body.classList.remove('light-mode');
-                document.querySelectorAll('.step-card,.feature-card,.card,.dataset-card').forEach(function(el){
-                    el.style.background='';
-                    el.style.boxShadow='';
-                    el.style.borderColor='';
-                });
-            localStorage.setItem('raven-theme', 'dark');
-            if (knob) knob.textContent = '\u{1F319}';
-        }
-    });
-})();
 
 // ── BUTTON RIPPLE ─────────────────────────────────────────────
 document.addEventListener('click', function(e) {

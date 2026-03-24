@@ -13,13 +13,6 @@ from functools import wraps
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "oaod_secret_key_change_in_production")
 
-# Required for Hugging Face Spaces iframe embedding
-app.config.update(
-    SESSION_COOKIE_SECURE=True,
-    SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SAMESITE='None'
-)
-
 UPLOAD_FOLDER = "static/uploads"
 OUTPUT_FOLDER = "static/outputs"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
